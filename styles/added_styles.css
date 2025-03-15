@@ -1,0 +1,79 @@
+:root {
+    --uoa-font-size: 40px;
+}
+
+
+/* ##################### */
+/* # Flip clock styles # */
+/* ##################### */
+
+/** This makes the colon between the hours and minutes flip clocks invisible */
+.minutes.flip-clock-small-divider {
+    opacity: 0.98;
+    transform: translateX(1px);
+}
+
+/** Moves first minute digit */
+.writing-timer.flip-clock-small-wrapper > ul:first-of-type {
+    transform: translateX(2px) translateY(-1px);
+}
+
+/** Moves last second digit */
+.writing-timer.flip-clock-small-wrapper>ul:last-of-type {
+    transform: translateX(1px) translateY(10px);
+}
+
+/** Moves second to last second digit */
+.writing-timer.flip-clock-small-wrapper>ul:nth-of-type(4) {
+    transform: translateX(103px) translateY(-10px);
+}
+
+
+/* ############################# */
+/* # Time intervals remaining  # */
+/* ############################# */
+/** Shift right column even items to the left */
+.col-sm-5.col-md-4.col-lg-3:has(.intervals):nth-of-type(2)>.intervals>li:nth-child(even) {
+    transform: translateX(-195px);
+}
+/** Shift left column even items to the right */
+.col-sm-5.col-md-4.col-lg-3:has(.intervals):nth-of-type(1)>.intervals>li:nth-child(even) {
+    transform: translateX(195px);
+}
+@media (max-width: 1200px) {
+    .col-sm-5.col-md-4.col-lg-3:has(.intervals):nth-of-type(2) > .intervals > li:nth-child(even) {
+        transform: translateX(-215px);
+    }
+    .col-sm-5.col-md-4.col-lg-3:has(.intervals):nth-of-type(1)>.intervals>li:nth-child(even) {
+        transform: translateX(215px);
+    }
+}
+
+/* # Fonts # */
+@font-face {
+    font-family: ComicSans;
+    src: url(../fonts/Comic\ Sans\ MS.ttf);
+}
+@font-face {
+    font-family: Fancy;
+    src: url(../fonts/Ballet.ttf);
+}
+h1, h3 {
+    font-family: ComicSans;
+}
+b {
+    font-family: Fancy;
+    font-size: 40px;
+    font-weight: bold;
+}
+#top-title-text b:nth-of-type(even) {
+    font-size: var(--uoa-font-size);
+}
+#smaller-title-text > b {
+    font-size: 25px !important;
+}
+
+#top-title-text {
+    position: absolute;
+    z-index: 500;
+}
