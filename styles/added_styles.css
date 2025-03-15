@@ -1,5 +1,7 @@
 :root {
     --uoa-font-size: 40px;
+    --clockPos: 0px;
+    --clockAngle: 0deg;
 }
 
 
@@ -76,4 +78,29 @@ b {
 #top-title-text {
     position: absolute;
     z-index: 500;
+}
+
+
+/* # Kill the clock */
+canvas {
+    transform: translateY(var(--clockPos)) rotate(var(--clockAngle));
+    transition: transform 0.5s;
+}
+
+/* # video players */
+.floating-player {
+    position: absolute;
+    z-index: 100;
+    width: 250px;
+    height: 140.625px;
+    background-color: black;
+}
+.floating-player video {
+    width: auto;
+    max-width: 100%;
+}
+
+#wanted-song {
+    top: 465px;
+    right: 50px;
 }

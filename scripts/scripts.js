@@ -173,26 +173,64 @@ angular.module("examClockAngularApp", ["ngAnimate", "ngCookies", "ngResource", "
 }]);
 
 
+// TODO fix shuffle
+function shuffle(array) {
+    let currentIndex = array.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+}
+
 var r = document.querySelector(':root');
 var fontSize = 40;
+
+var audioElements = document.getElementsByClassName("audio-elements")
+console.log(audioElements)
+shuffle(audioElements);
+console.log(audioElements);
+
+var counter = 30;
+var arrayIndex = 0;
 
 // # EVERYTHING FUNCTION
 function timeStuff(tTotal, tRemaining) {
     // console.log("hi")
-    // For a 7 hour timer, this starts at 7 * 60 * 60 = 25200
-    
+    // For a 7 hour timer, tTotal starts at 7 * 60 * 60 = 25200
     
 
     fontSize = Math.floor(40 + 160*((tTotal-tRemaining)/tTotal));
     console.log(((tTotal - tRemaining) / tTotal))
     r.style.setProperty('--uoa-font-size', fontSize + "px");
 
+    if ((tTotal - tRemaining) / tTotal > 0.5) {
+        r.style.setProperty('--clockPos', "450px");
+        r.style.setProperty('--clockAngle', "390deg");
+    }
 
-    // Grow title font to 200px over total time
-    // if (tRemaining % (tTotal / 160) == 0) {
-    //     r.style.setProperty('--uoa-font-size', fontSize + "px");
-    //     fontSize++;
-    //     console.log("font size is now: ", fontSize);
-    // }
 
+    if ((tTotal - tRemaining) / tTotal > 0.5) {
+        // document.getElementById("test").play();
+    }
+
+    // TODO RANDOMISE THE DECREMENT
+    counter--;
+
+    if(counter <= 0) {
+        audioElements[arrayIndex].play();
+        arrayIndex = (arrayIndex+1) % audioElements.length;
+        if(arrayIndex == 0) {
+            shuffle(audioElements);
+        }
+        counter = 30;
+
+    }
 }
