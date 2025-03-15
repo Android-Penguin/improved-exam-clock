@@ -61,6 +61,7 @@ window.CoolClock = function (a) {
                 alpha: 1
             }
         },
+        // STARTS HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         chunkySwiss: {
             outerBorder: {
                 lineWidth: 4,
