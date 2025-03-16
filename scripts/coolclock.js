@@ -105,7 +105,7 @@ window.CoolClock = function (a) {
             },
             secondDecoration: {
                 lineWidth: 2,
-                startAt: 70,
+                startAt: 60,
                 radius: 8,
                 fillColor: "red",
                 color: "red",

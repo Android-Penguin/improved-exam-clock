@@ -1,4 +1,4 @@
-let uncomfortableTime = 23;
+let uncomfortableTime = 4;
 
 "use strict";
 angular.module("examClockAngularApp", ["ngAnimate", "ngCookies", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.bootstrap"]).config(["$routeProvider", function(a) {
@@ -222,7 +222,8 @@ console.log(audioElements);
 var randomElements = pickRandomElements(audioElements)
 console.log(randomElements);
 
-var counter = 20;
+var counter = 0;
+//var gapCounter = 10;
 var arrayIndex = 0;
 
 // # EVERYTHING FUNCTION
@@ -247,15 +248,15 @@ function timeStuff(tTotal, tRemaining) {
 
     // TODO RANDOMISE THE DECREMENT
     counter--;
-
     if(counter <= 0) {
         randomElements[arrayIndex].play();
         arrayIndex = (arrayIndex+1) % randomElements.length;
+        counter = 20;
         if(arrayIndex == 0) {
             randomElements = pickRandomElements(audioElements)
             console.log(randomElements);
+            counter = 3*60;
         }
-        counter = 20;
     }
 
 
