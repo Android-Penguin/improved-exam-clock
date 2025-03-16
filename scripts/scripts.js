@@ -105,7 +105,7 @@ angular.module("examClockAngularApp", ["ngAnimate", "ngCookies", "ngResource", "
             },
             interval: function() {
                 a.tick++, "$apply" != a.$root.$$phase && "$digest" != a.$root.$$phase && a.$apply()
-                console.log(a.writingTimer.getTime() - a.times.writingTime)
+                //console.log(a.writingTimer.getTime() - a.times.writingTime)
                 // TODO PLACEHOLDER FOR FUNCTION
                 timeStuff(a.times.writingTime*60, a.writingTimer.getTime() - a.times.writingTime);
             },
@@ -174,6 +174,8 @@ angular.module("examClockAngularApp", ["ngAnimate", "ngCookies", "ngResource", "
 
 
 // TODO fix shuffle
+
+/*
 function shuffle(array) {
     let currentIndex = array.length;
 
@@ -182,6 +184,7 @@ function shuffle(array) {
 
         // Pick a remaining element...
         let randomIndex = Math.floor(Math.random() * currentIndex);
+        //console.log(randomIndex)
         currentIndex--;
 
         // And swap it with the current element.
@@ -189,16 +192,37 @@ function shuffle(array) {
             array[randomIndex], array[currentIndex]];
     }
 }
+*/
+function rN(array) { 
+    // max is necessary for black magic
+    var rN = Math.max(Math.floor(Math.random() * (array.length - 1)), 0); 
+    console.log(rN)
+    return rN;
+}
+
+function pickRandomElements(array) {
+    var randomElements = new Array();
+    while (randomElements.length < 5) {
+        let f = array[rN(array)];
+        console.log(f)
+        if (!randomElements.includes(f)) {
+            randomElements.push(f);
+        }
+    }
+    return randomElements;
+}
+
+
 
 var r = document.querySelector(':root');
 var fontSize = 40;
 
-var audioElements = document.getElementsByClassName("audio-elements")
-console.log(audioElements)
-shuffle(audioElements);
+var audioElements = document.getElementsByClassName("audio-elements");
 console.log(audioElements);
+var randomElements = pickRandomElements(audioElements)
+console.log(randomElements);
 
-var counter = 30;
+var counter = 20;
 var arrayIndex = 0;
 
 // # EVERYTHING FUNCTION
@@ -208,7 +232,7 @@ function timeStuff(tTotal, tRemaining) {
     
 
     fontSize = Math.floor(40 + 160*((tTotal-tRemaining)/tTotal));
-    console.log(((tTotal - tRemaining) / tTotal))
+    //console.log(((tTotal - tRemaining) / tTotal))
     r.style.setProperty('--uoa-font-size', fontSize + "px");
 
     if ((tTotal - tRemaining) / tTotal > 0.5) {
@@ -225,12 +249,14 @@ function timeStuff(tTotal, tRemaining) {
     counter--;
 
     if(counter <= 0) {
-        audioElements[arrayIndex].play();
-        arrayIndex = (arrayIndex+1) % audioElements.length;
+        randomElements[arrayIndex].play();
+        arrayIndex = (arrayIndex+1) % randomElements.length;
         if(arrayIndex == 0) {
-            shuffle(audioElements);
+            randomElements = pickRandomElements(audioElements)
+            console.log(randomElements);
         }
-        counter = 30;
-
+        counter = 20;
     }
+
+
 }
